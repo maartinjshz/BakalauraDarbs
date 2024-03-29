@@ -43,7 +43,8 @@ def LineSearch_FindAl(Molp_problem, y, Direction,Gradient,Fun,tol):
     for it in range(Molp_problem.Nr_constr):
         while alpha > tol:
             if  np.dot(Molp_problem.A_ub[it],y + alpha*Direction) - Molp_problem.b[it] > 0:
-                    alpha *=  ro
+                    alpha = alpha * ro
+
             else:
                 break
 
@@ -100,7 +101,7 @@ def SmRel(Molp_problem, Fun ,x0 , tol = 10**(-9), Aggregation = None):
             # Atrod matricu A_q 
             A_q= []
             for it in range(Molp_problem.Nr_constr):
-                if  (np.dot(Molp_problem.A_ub[it],y) - Molp_problem.b[it])**(2) < tol:
+                if  (np.dot(Molp_problem.A_ub[it],x0) - Molp_problem.b[it])**(2) < tol:
                     A_q.append(Molp_problem.A_ub[it])
             A_q = np.array(A_q)
 
@@ -126,7 +127,7 @@ def SmRel(Molp_problem, Fun ,x0 , tol = 10**(-9), Aggregation = None):
         # Projekcija
         for it in range(Molp_problem.Nr_constr):       
             if  np.dot(Molp_problem.A_ub[it],x0) - Molp_problem.b[it] > 0: 
-                y = solve_ls(np.identity(x0.shape[0]), x0,Molp_problem.A_ub, Molp_problem.b, solver="daqp")
+                x0 = solve_ls(np.identity(x0.shape[0]), x0,Molp_problem.A_ub, Molp_problem.b, solver="daqp")
                 isClose = True
 
 
