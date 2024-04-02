@@ -1,6 +1,6 @@
 import numpy as np
 
-from NumericAlg import SmRel
+from NumericAlg import SmRel,brute
 
 
 
@@ -58,7 +58,17 @@ def solve_orders(Molp_problem, method = None,
         # Risina ar algoritmu: 
         rez = SmRel(Molp_problem, P_x_y, x0, tol, Aggregation )
         return rez
+    
+    # Ar brute tiek veikta "pilna pārlase" punkta x0 apkārtnē. 
+    # Tas ir paredzēts, lai vispirms tiktu veikta optimizačija ar citu algoritmu
+    # Un pēc tam pārbaudīta tā atrisinājuma apkārtne. 
 
+    # Ar šo brute algoritmu nav ieteicams meklēt atrisinājumu lielajam piemēram. 
+    # Šim piemēram ir atsevišķs kods valodā C, kur ir samazināts parametru skaits un
+    # Kurš šo darbu veic ātrāk 
+    elif method == "brute":
+         rez = brute(Molp_problem, P_x_y, x0 )
+         return rez
 
 
 

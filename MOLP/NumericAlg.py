@@ -2,10 +2,7 @@ import numpy as np
 from qpsolvers import solve_ls
 import scipy.sparse as sp
 
-
-
 def GradProj( Molp_problem,A_q,Directions):
-
     P_k = np.dot(np.dot(A_q.T,  np.linalg.inv(np.dot(A_q, A_q.T))), A_q)
     P_k =   + (np.eye(P_k.shape[0]) - P_k ) 
     d = np.dot(P_k, Directions)
@@ -17,12 +14,10 @@ def GradProj( Molp_problem,A_q,Directions):
             print(lambda_k,d)
             return [d, True]
         else:
-            # TODO 
             Id_of_MostNeg = np.argmin(lambda_k)
             GradProj(Molp_problem,np.delete(A_q, Id_of_MostNeg,axis=0),Directions)
     else:
         return [d,False]
-
 
 def LineSearch(Molp_problem, y, Direction,Gradient,Fun,tol):
     alpha =   1/(np.linalg.norm(Direction) )
@@ -31,9 +26,7 @@ def LineSearch(Molp_problem, y, Direction,Gradient,Fun,tol):
     Fun_val = Fun(y,Molp_problem)
     while Fun( y  + alpha * Direction,Molp_problem,)  <= Fun_val + c1 *alpha * np.dot( Direction,Gradient)  and alpha > tol :
             alpha = alpha * ro
-
     return alpha  
-
 
 def LineSearch_FindAl(Molp_problem, y, Direction,Gradient,Fun,tol):
 
@@ -44,10 +37,8 @@ def LineSearch_FindAl(Molp_problem, y, Direction,Gradient,Fun,tol):
         while alpha > tol:
             if  np.dot(Molp_problem.A_ub[it],y + alpha*Direction) - Molp_problem.b[it] > 0:
                     alpha = alpha * ro
-
             else:
                 break
-
     
     Fun_val = Fun(y,Molp_problem)
     while Fun( y  + alpha * Direction,Molp_problem,)  <= Fun_val + c1 *alpha * np.dot( Direction,Gradient)  and alpha > tol :
@@ -72,7 +63,8 @@ def FindDirection(Molp_problem,y,Aggregation):
                 elif z_x == z_y :
                     gradient_i+= Molp_problem.C_ub[it]/2  /(Molp_problem.Fun_norm[it])/2
 # P_i gradientu normē
-            gradient_i = gradient_i/(np.linalg.norm(gradient_i)  + 10**(-15))
+            if np.linalg.norm(np.linalg.norm(gradient_i)) != 0 :
+                gradient_i = gradient_i/(np.linalg.norm(gradient_i))
             Val_and_grad.append({'FunVal': P_i_x_y_value, 'FunGrad': gradient_i})
 
 # Pēc tam sarindo augošā secībā pēc funckiajs vērtības 
@@ -94,10 +86,9 @@ def SmRel(Molp_problem, Fun ,x0 , tol = 10**(-9), Aggregation = None):
 
         # Atrod virzienu
         Direction,Gradient = FindDirection(Molp_problem,x0,Aggregation)
+
         # Atrdod soli
-
         if isClose:
-
             # Atrod matricu A_q 
             A_q= []
             for it in range(Molp_problem.Nr_constr):
@@ -107,6 +98,7 @@ def SmRel(Molp_problem, Fun ,x0 , tol = 10**(-9), Aggregation = None):
 
 # Var gadīties, ka matrica A_q ir tukša. Ja tā, tad netiek mainīts virziens.
             if A_q.shape[0] != 0:
+                # TODO pielikt if/else lai Dir vietā būtu Grad 
                 Direction,toEnd = GradProj( Molp_problem,A_q,Direction)
                 step = LineSearch_FindAl(Molp_problem, x0, Direction,Gradient,Fun,tol)
             # Atrod soļa garumu
@@ -116,7 +108,6 @@ def SmRel(Molp_problem, Fun ,x0 , tol = 10**(-9), Aggregation = None):
         else:
             step = LineSearch(Molp_problem, x0, Direction,Gradient,Fun,tol)
         
-
         if step < tol or toEnd:
             print("Atrisinājums saniegts punktā: ", x0)
             return [x0, Fun(x0,Molp_problem)]
@@ -130,5 +121,47 @@ def SmRel(Molp_problem, Fun ,x0 , tol = 10**(-9), Aggregation = None):
                 x0 = solve_ls(np.identity(x0.shape[0]), x0,Molp_problem.A_ub, Molp_problem.b, solver="daqp")
                 isClose = True
 
+# 
+def brute(Molp_problem, Fun ,x0,tol = 10**(-8) ):
 
+    fun_max = Fun(x0,Molp_problem)
+    h = 1
+    while True:
+        
+        # uztaisa augšējo un apakšējo kastes punktu
+        x_lower = x0 - h
+        x_upper = x0 + h
+
+# Nav jēga apskatīt vērtības mazākas nekā 0, jo tās ir ārpus kopas. 
+        x_lower = np.where(x_lower > 0, x_lower, 0)
+
+        x_h = x0*0
+        print(" ------------------------------------------------------------ ")
+        print("Solis ir: " , h)
+        print("Šajā iterācijā apaksā: ", x_lower, " un augša ", x_upper )
+        print("un šajā iterācijā x_max: ", x0, " un fun_max: ", fun_max)
+        print(" ------------------------------------------------------------ ")
+        while True:
+
+            if x_h[0] + x_lower[0]>= x_upper[0]:
+                break
+            else:
+                for i,xi in enumerate(reversed(x_h)):
+
+                    if  x_h[i]+x_lower[i] >= x_upper[i]:
+                        x_h[i-1] += 2*h/50
+                        x_h[i] = 0
+                    elif (i == x0.shape[0]-1):
+
+                        x_h[i] = x_h[i] + 2*h/50
+
+                    fun_val = Fun(x_lower + x_h,Molp_problem)
+                    if fun_val > fun_max:
+                        fun_max = fun_val
+                        x0 = x_lower + x_h
+        h = h /10
+        if h<= tol:
+            break
+
+    
     
