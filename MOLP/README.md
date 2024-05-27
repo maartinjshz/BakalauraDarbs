@@ -23,7 +23,8 @@ $$\mu_{i}(x) = \frac{z_{i}(x) - z^{min}_{i}}{z^{max}_{i} - z^{min}_{i} },$$
 
 kur $x \in D$, $z^{min}_{i} = \min\limits_{x\in D}{ z_{i}(x )}$  un $z^{max}_{i} =  \max\limits_{x\in D}{ z_{i}(x )}$.
 
-un tālāk agregē piederības funkcijas, lietojot t-normas, sākotnējo DLP problēmu pārrasktot kā:     $$ \max\limits_{x\in D} T(\mu_{1}(x),\ldots, \ \mu_{l}(x)).$$
+un tālāk agregē piederības funkcijas, lietojot t-normas, sākotnējo DLP problēmu pārrasktot kā:     
+$$\max\limits_{x\in D} T(\mu_{1}(x),\ldots, \ \mu_{l}(x)).$$
 
 
 
@@ -52,7 +53,7 @@ Piemēram:
 
 Ar šo pieeju tiek agregētas nestriktās ekvivalences tā, lai:
 
- $$\max\limits_{y\in D} A(  E_{1}(x^{max}_{1},y), \ldots,\ E_{l}(x^{max}_{l},y)  ).$$
+$$\max\limits_{y\in D} A(  E_{1}(x^{max}_{1},y), \ldots,\ E_{l}(x^{max}_{l},y)  ).$$
 
 funkcija $A$ arī būtu nestriktā ekvivalence. Šeit $x_{i}^{max}$ ir ppunkts, kurā i-tā mērķa funkcija sasniedz savu maksimumu. 
 
