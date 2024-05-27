@@ -21,7 +21,7 @@ Piemēram:
 Ar šo pieeju katrai mērķa funkcijai tiek izveidota piederības funkcija:
 $$\mu_{i}(x) = \frac{z_{i}(x) - z^{min}_{i}}{z^{max}_{i} - z^{min}_{i} },$$
 
-kur $x \in D$, $z^{min}_{i} = \min\limits_{x\in D}{ z_{i}(x )}$  un $z^{max}_{i} =  \max\limits_{x\in D}{ z_{i}(x )}$.
+kur $x \in D$, $z^{min}_{i} = \min\limits_{x\in D}{z_{i}(x)}$ un $z^{max}_{i} =  \max\limits_{x\in D}{ z_{i}(x )}$.
 
 un tālāk agregē piederības funkcijas, lietojot t-normas, sākotnējo DLP problēmu pārrasktot kā:     
 $$\max\limits_{x\in D} T(\mu_{1}(x),\ldots, \ \mu_{l}(x)).$$
