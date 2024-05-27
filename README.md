@@ -21,19 +21,18 @@ kur $x, a_{i} \in \mathbb{R}^m$,  $i=1,...,n$ un $b \in \mathbb{R}^l$ .
 DLP prolbēma vispārīgā gadījumā: 
 
 $$\begin{equation*} 
-    \begin{array}{lll}
-    \text{Maksimizēt} 
-    & c_{1 1}x_{1}+c_{1 2}x_{2}+ \ldots c_{1m}x_{m} \\
-    & \ldots \\
-    &c_{l 1}x_{1}+c_{l 2}x_{2}+ \ldots c_{ l m}x_{m} \\
-    \text{Pie}\\
-    & a_{11}x_{1} + a_{12}x_{2} + \ldots a_{1m}x_{m} \leq b_{1}  \\
-    & a_{21}x_{1} + a_{22}x_{2} + \ldots a_{2m}x_{m} \leq b_{2}  \\
-    & \ldots \\
-
-    & a_{n1}x_{1} + a_{n2}x_{2} + \ldots a_{nm}x_{m} \leq b_{n}  \\
-    & x_i \geq 0 \ i=1,\ldots, \ m,
-    \end{array}
+\begin{array}{lll}
+\text{Maksimizēt} 
+& c_{1 1}x_{1}+c_{1 2}x_{2}+ \ldots c_{1m}x_{m} \\
+& \ldots \\
+&c_{l 1}x_{1}+c_{l 2}x_{2}+ \ldots c_{ l m}x_{m} \\
+\text{Pie}\\
+& a_{11}x_{1} + a_{12}x_{2} + \ldots a_{1m}x_{m} \leq b_{1}  \\
+& a_{21}x_{1} + a_{22}x_{2} + \ldots a_{2m}x_{m} \leq b_{2}  \\
+& \ldots \\
+& a_{n1}x_{1} + a_{n2}x_{2} + \ldots a_{nm}x_{m} \leq b_{n}  \\
+& x_i \geq 0 \ i=1,\ldots, \ m,
+\end{array}
 \end{equation*}$$
 
 
