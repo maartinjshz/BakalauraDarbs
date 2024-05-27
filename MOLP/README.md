@@ -70,16 +70,29 @@ funkcija $A$ arī būtu nestriktā ekvivalence. Šeit $x_{i}^{max}$ ir ppunkts, 
 Piemēram: 
 
 $$
-      L(x,y)=    \begin{cases} 
-      1&  \text{ ja } x \preceq y  \\
-      E(x,y)  & \text{ citādi} . 
-   \end{cases}$$
+L(x,y)=    \begin{cases} 
+1&  \text{ ja } x \preceq y  \\
+E(x,y)  & \text{ citādi} . 
+\end{cases}$$
 
 
-   Ar šo pieeju, katrai mērķa funkcijai tiek definēts sakārtojums un šie sakārtojumi tiek agregēti: 
+Ar šo pieeju, katrai mērķa funkcijai tiek definēts sakārtojums un šie sakārtojumi tiek agregēti: 
 
    $$P(x,y) = A(P_{1}(x,y), \ldots, \ P_{l}(x,y))$$
 
-   lai funkcija P(x,y) arī būtu nestriktais sakārtojums. Tad DLP problēmu var uzrakstīt kā maxmin problēmu: 
+lai funkcija P(x,y) arī būtu nestriktais sakārtojums. Tad DLP problēmu var uzrakstīt kā maxmin problēmu: 
 
-   $$\max_{y\in D} \min_{x\in D} P(x,y).$$
+$$\max_{y\in D} \min_{x\in D} P(x,y).$$
+
+## DLP risināšana
+
+Katrai no pieejam ir izveidota atsevišķa funkcija. Failā main.py ir parādīts, kā izsaukt katru no funkcijām. Vispirms tiek definēta pati DLP prolēmu, kuras definēšanai ir nepieciešams nosacījumu vektors $b$, matrica $A$ un mērķa funkciju koeficienti. Pēc tam šie parametri tiek padoti funkcijai failā MakeMOlp.py, kas atrod katrai mērķa funkcijai lokālos ektrēmus. Gan minimuma punktus, kas maksimuma. Pēc tam tiek noteiktas kopas D virsotnes. (Vajadzīgs sakārtojumu algoritmam).
+
+Pēc tam var izsaukt katru metodi un iegūt atrisinājumu $x$. Risinot ar t-normām, ir iespējams izvēlēties, ar kuru t-normu agregēt mērķa funkcijas. Dažādas t-normas var dot dažādus atrisinājumus. Pašlaik, neatkarīgi no t-normas izvēles, liet lietots Nelder-Mead algoritms.
+
+Risinot ar nestriktajām ekvivalencēm, problēma tiek pārrakstīta kā LP problēma un atrisināta ar simpleksa metodi.
+
+Risinot ar nestriktajiem sakārtojumiem, tiek lietots algoritms, kas ir aprakstīts pie maxmin problēmu risināšanas sadaļas un apvienots ar gradienta projekcijas algoritmu.
+
+Iekš main.py ir definēts piemērs ar 6 mērķa funkcijām. Šo piemēru risinot ar pilnu pārlasi ir jāuzmanās, jo tas var aizņemt pārāk daudz laika. Tāpēc ir ieteicams atrisināt šo piemēru ar kādu no iepriekš minētajām metodēm un pēc tam šo atrisinājumu padot, kā sākuma punktu pilnajai pārlasei.
+

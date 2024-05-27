@@ -29,7 +29,21 @@ C_fb = np.array([
 ])
 
 
-# Zimmermana problēma 
+## Zimmermana piemērs
+C_fb = np.array([
+    [-1,2],       
+    [2,1],          
+         
+])
+b_fb =  np.array([21,27,45,30])
+A_fb = np.array([
+    [-1,3], 
+    [1,3], 
+    [4,3],   
+    [3,1],    
+])
+
+
 
 
 Molp_problem = MolpProblem(C_fb,A_fb,b_fb)
