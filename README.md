@@ -20,8 +20,7 @@ kur $x, a_{i} \in \mathbb{R}^m$,  $i=1,...,n$ un $b \in \mathbb{R}^l$ .
 
 DLP prolbēma vispārīgā gadījumā: 
 
-$$
-\begin{equation*} 
+$$\begin{equation*} 
     \begin{array}{lll}
     \text{Maksimizēt} 
     & c_{1 1}x_{1}+c_{1 2}x_{2}+ \ldots c_{1m}x_{m} \\
@@ -35,8 +34,7 @@ $$
     & a_{n1}x_{1} + a_{n2}x_{2} + \ldots a_{nm}x_{m} \leq b_{n}  \\
     & x_i \geq 0 \ i=1,\ldots, \ m,
     \end{array}
-\end{equation*}
-$$
+\end{equation*}$$
 
 
 Šajā darbā tiek aplūkota šādu problēmu risināšana, lietojot nestriktās attiecības, kā t-normas, nestriktās ekvivalences attiecības un nestrikto sakārtojuma attiecību. 
