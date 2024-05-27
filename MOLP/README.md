@@ -19,7 +19,7 @@ Piemēram:
 
 
 Ar šo pieeju katrai mērķa funkcijai tiek izveidota piederības funkcija:
-$$\mu_{i}(x) = \frac{z_{i}(x) - z^{min}_{i}}{z^{max}_{i} - z^{min}_{i} }$$
+$$\mu_i(x) = \frac{z_i(x) - z^{min}_i}{z^{max}_i - z^{min}_i }$$
 
 kur $x \in D$, $z^{min}_{i} = \min\limits_{x\in D}{z_{i}(x)}$ un $z^{max}_{i} =  \max\limits_{x\in D}{ z_{i}(x )}$.
 
